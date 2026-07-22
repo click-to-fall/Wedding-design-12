@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="overflow-hidden select-none bg-[#F5EFEB]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ليلة العمر | تجربة سينمائية فاخرة</title>
+    
+    <!-- Core Engine Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@200;300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-ivory: #F5EFEB;
+            --card-ivory: #FDFBF9;
+            --text-main: #111111;
+            --accent-black: #000000;
+            --muted-gray: #666666;
+            --border-line: rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            background-color: var(--bg-ivory);
+            color: var(--text-main);
+            font-family: 'Cairo', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .font-luxury {
+            font-family: 'Amiri', serif;
+        }
+
+        /* Viewport Locking for Cinematic Camera Depth */
+        .viewport-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        /* Premium Integrated Asset Backdrop Plane */
+        .cinematic-bg-plane {
+            position: absolute;
+            inset: 0;
+            background-image: url('background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transform: scale(1.05);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Glassmorphism Architecture Layer */
+        .glass-surface {
+            background: rgba(253, 251, 249, 0.92);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--border-line);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Ambient Shading Overlay */
+        .fog-layer {
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5), transparent 80%);
+            filter: blur(40px);
+            pointer-events: none;
+        }
+
+        /* Realistic Fine Grain Texture Overlay */
+        .watercolor-grain {
+            background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
+            background-size: 32px 32px;
+        }
+
+        .interactive-element {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+        }
+
+        /* Double border styling for elite look */
+        .luxury-border {
+            position: relative;
+        }
+        .luxury-border::after {
+            content: '';
+            position: absolute;
+            inset: 6px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        /* Hide all step panels cleanly upfront */
+        .scene-panel {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scene-panel.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased watercolor-grain">
+
+    <!-- CANVAS ENGINE (Dynamic Fine Onyx Dust Particles) -->
+    <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-20"></canvas>
+
+    <!-- CINEMATIC STAGE CONTAINER -->
+    <div class="viewport-container">
+        
+        <!-- Background Sky, Integrated Asset Layer, & Ambient Lighting environment -->
+        <div id="skyEnvironment" class="absolute inset-0 z-0 bg-[#EFE8E2]">
+            <div id="bgPlane" class="cinematic-bg-plane opacity-25 mix-blend-multiply"></div>
+            <div class="fog-layer absolute inset-0 w-full h-full transform"></div>
+        </div>
+
+        <!-- CAMERA TRACK SCENE LAYER -->
+        <div id="cameraTrack" class="relative w-full h-full transform-gpu">
+
+            <!-- ================= INTRO SCENE ================= -->
+            <div id="sceneIntro" class="scene-panel active absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-30">
+                <div class="max-w-3xl space-y-8">
+                    <p class="text-xs uppercase tracking-[0.4em] text-[#000000] font-semibold">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                    <h1 class="font-luxury text-5xl md:text-8xl text-[#111111] leading-relaxed tracking-wide">
+                        لكل قصة بداية... <br>
+                        <span class="text-xl md:text-3xl font-sans font-light text-[#666666] block mt-6 tracking-normal">وقصتنا تبدأ بتشريفكم الغالي</span>
+                    </h1>
+                    <div class="pt-10">
+                        <button onclick="navigateToScene('sceneEnvelope', 1.08)" class="px-8 py-3.5 bg-[#000000] text-[#FDFBF9] text-xs uppercase tracking-[0.2em] font-semibold rounded-full hover:bg-[#333333] transition-all duration-300 shadow-lg">
+                            ابدء الرحلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SCENE: THE DISCOVERY (3D ENVELOPE) ================= -->
+            <div id="sceneEnvelope" class="scene-panel absolute inset-0 flex flex-col items-center justify-center px-4 z-20">
+                <div class="max-w-xl w-full aspect-[4/3] relative perspective-1000 mb-8" id="envelopeContainer">
+                    <!-- Outer Fine Linen Envelope Body -->
+                    <div id="envelopeOuter" class="w-full h-full bg-[#EFE8E2] border border-black/20 rounded-2xl shadow-xl relative overflow-hidden flex items-center justify-center">
+                        
+                        <!-- Premium Wax Seal Button -->
+                        <div id="waxSeal" class="absolute z-30 w-24 h-24 rounded-full bg-[#111111] border-2 border-[#FDFBF9] flex items-center justify-center cursor-pointer shadow-2xl transform active:scale-95 interactive-element hover:rotate-12">
+                            <span class="font-luxury text-xs text-[#FDFBF9] tracking-widest font-bold pointer-events-none">افتح الدعوة</span>
+                        </div>
+                        
+                        <!-- Envelope Flap Cover Lid -->
+                        <div id="envelopeFlap" class="absolute top-0 inset-x-0 h-1/2 bg-[#E5DDD5] border-b border-black/10 origin-top z-20"></div>
+
+                        <!-- EXPLICIT INVITATION PLATE -->
+                        <div id="premiumInvitationCard" class="absolute w-[94%] h-[94%] bg-[#FDFBF9] rounded-xl p-6 md:p-12 flex flex-col justify-between items-center text-center shadow-2xl z-10 opacity-0 transform translate-y-8 border border-black/10 luxury-border">
+                            <!-- Fine Border Inlay Rules -->
+                            <div class="absolute inset-2 border border-black/5 pointer-events-none rounded-lg"></div>
+                            
+                            <div class="text-[11px] tracking-[0.25em] text-[#666666] font-semibold">نَتَشَرَّفُ بِدَعْوَتِكُمْ لِحُضُورِ حَفْلِ زِفَافِنَا</div>
+
+                            <!-- Typography & Flow Arrangement -->
+                            <div class="space-y-6 my-auto relative z-10">
+                                <div class="font-luxury text-5xl md:text-6xl text-[#111111] tracking-wide font-bold">أحمد &amp; ياسمين</div>
+                                <div class="w-20 h-[1px] bg-black/40 mx-auto"></div>
+                                <p class="text-xs md:text-sm font-light text-[#111111] max-w-md mx-auto leading-loose">
+                                    لفرحنا اليوم ندعوكم، بالطيب والورد نلاقيكم، وبالحب والخير نشكر تهانيكم. حضوركم يكمل بهجة قلوبنا.
+                                </p>
+                            </div>
+
+                            <!-- Structural Grid Metrics -->
+                            <div class="grid grid-cols-3 w-full border-t border-b border-black/20 py-4 text-[#111111] font-sans text-xs md:text-sm">
+                                <div class="text-center">
+                                    <span class="block text-[10px] text-[#666666] mb-1">الجمعة</span>
+                                    <span class="font-semibold">٢٥ نوفمبر</span>
+                               </div>
+                                <div class="text-center border-l border-r border-black/20 font-luxury text-xl md:text-2xl text-[#111111] flex items-center justify-center font-bold">
+                                    2030
+                                </div>
+                                <div class="text-center">
+                                    <span class="block text-[10px] text-[#666666] mb-1">الموعد</span>
+                                    <span class="font-semibold">٨ مساءً</span>
+                                </div>
+                            </div>
+
+                            <!-- Venue Specifications -->
+                            <div class="text-[11px] text-[#111111] tracking-wide font-sans mt-2">
+                                <span class="font-bold block text-[#000000]">قاعة الماسة</span>
+                                القاهرة، الزمالك
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="nextFromEnvelope" disabled onclick="navigateToScene('sceneGarden', 1.12)" class="px-8 py-3 bg-black text-white text-xs rounded-full font-semibold opacity-40 transition-all duration-300">
+                    التالي
+                </button>
+            </div>
+
+            <!-- ================= SCENE: THE ROYAL GARDEN WALK ================= -->
+            <div id="sceneGarden" class="scene-panel absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+                <div class="max-w-4xl space-y-12">
+                    <h2 class="font-luxury text-5xl md:text-7xl text-[#111111]">تفاصيل المناسبة</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                        <div class="glass-surface p-8 rounded-2xl transform luxury-border">
+                            <span class="block font-luxury text-2xl text-black mb-1">قواعد اللباس</span>
+                            <span class="text-xs text-[#666666] font-light">رسمي فاخر بالكامل</span>
+                        </div>
+                        <div class="glass-surface p-8 rounded-2xl transform luxury-border">
+                            <span class="block font-luxury text-2xl text-black mb-1">الموقع الجغرافي</span>
+                            <span class="text-xs text-[#666666] font-light">الزمالك، القاهرة</span>
+                        </div>
+                        <div class="glass-surface p-8 rounded-2xl transform luxury-border">
+                            <span class="block font-luxury text-2xl text-black mb-1">استقبال الضيوف</span>
+                            <span class="text-xs text-[#666666] font-light">٧:٣٠ مساءً</span>
+                        </div>
+                        <div class="glass-surface p-8 rounded-2xl transform luxury-border">
+                            <span class="block font-luxury text-2xl text-black mb-1">مراسم العقد</span>
+                            <span class="text-xs text-[#666666] font-light">٨:٣٠ مساءً</span>
+                        </div>
+                    </div>
+                    <div class="pt-4">
+                        <button onclick="navigateToScene('sceneCountdown', 1.15)" class="px-8 py-3.5 bg-[#000000] text-[#FDFBF9] text-xs uppercase tracking-[0.15em] font-semibold rounded-full hover:bg-[#333333] transition-all duration-300 shadow-lg">
+                            التالي
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SCENE: MAGICAL COUNTDOWN CLOCK ================= -->
+            <div id="sceneCountdown" class="scene-panel absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+                <div class="max-w-3xl w-full space-y-12">
+                    <h3 class="font-luxury text-4xl md:text-5xl text-[#111111] tracking-wider">العد التنازلي للمناسبة</h3>
+                    <div class="grid grid-cols-4 gap-4 md:gap-8 max-w-2xl mx-auto" id="countdownMetrics">
+                        <div class="glass-surface p-6 md:p-8 rounded-2xl luxury-border">
+                            <span id="days" class="block text-3xl md:text-6xl font-light text-black tracking-tight">00</span>
+                            <span class="text-[11px] uppercase text-[#666666] mt-2 block font-semibold">أيام</span>
+                        </div>
+                        <div class="glass-surface p-6 md:p-8 rounded-2xl luxury-border">
+                            <span id="hours" class="block text-3xl md:text-6xl font-light text-black tracking-tight">00</span>
+                            <span class="text-[11px] uppercase text-[#666666] mt-2 block font-semibold">sاعات</span>
+                        </div>
+                        <div class="glass-surface p-6 md:p-8 rounded-2xl luxury-border">
+                            <span id="minutes" class="block text-3xl md:text-6xl font-light text-black tracking-tight">00</span>
+                            <span class="text-[11px] uppercase text-[#666666] mt-2 block font-semibold">دقائق</span>
+                        </div>
+                        <div class="glass-surface p-6 md:p-8 rounded-2xl luxury-border">
+                            <span id="seconds" class="block text-3xl md:text-6xl font-light text-black tracking-tight">00</span>
+                            <span class="text-[11px] uppercase text-[#666666] mt-2 block font-semibold">ثواني</span>
+                        </div>
+                    </div>
+                    <div class="pt-4">
+                        <button onclick="navigateToScene('sceneFinale', 1.2)" class="px-8 py-3.5 bg-[#000000] text-[#FDFBF9] text-xs uppercase tracking-[0.15em] font-semibold rounded-full hover:bg-[#333333] transition-all duration-300 shadow-lg">
+                            عرض الختام
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SCENE: THE FINALE ================= -->
+            <div id="sceneFinale" class="scene-panel absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+                <div class="max-w-2xl space-y-8">
+                    <h4 class="font-luxury text-5xl md:text-7xl text-[#111111] leading-relaxed">
+                        وجودكم هو أجمل هدية... <br>
+                        <span class="text-xl md:text-3xl text-[#666666] font-sans font-light mt-6 block tracking-wide">ننتظركم بكل حب وشوق</span>
+                    </h4>
+                    <div class="w-32 h-[1px] bg-black/20 mx-auto my-8"></div>
+                    <p class="font-luxury text-4xl text-[#000000] tracking-wide">أحمد &amp; ياسمين</p>
+                    <p class="text-[11px] tracking-[0.35em] text-[#666666] font-sans pt-16 uppercase font-bold">نوفمبر 2030 • القاهرة</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MAIN ENGINE IMPLEMENTATION -->
+    <script>
+        // Interactive Scene Navigation Controller
+        function navigateToScene(sceneId, bgScale) {
+            document.querySelectorAll('.scene-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById(sceneId).classList.add('active');
+            document.getElementById('bgPlane').style.transform = `scale(${bgScale})`;
+        }
+
+        // Wax Seal Open Mechanism
+        const seal = document.getElementById('waxSeal');
+        const nextBtn = document.getElementById('nextFromEnvelope');
+        seal.addEventListener('click', () => {
+            gsap.timeline()
+                .to(seal, { scale: 0, opacity: 0, duration: 0.5, ease: 'power4.in' })
+                .to('#envelopeFlap', { transform: 'rotateX(-180deg)', zIndex: 0, duration: 0.8, ease: 'power2.inInOut' })
+                .to('#premiumInvitationCard', { opacity: 1, y: 0, zIndex: 40, duration: 1.2, ease: 'power4.out' }, '-=0.1')
+                .then(() => {
+                    nextBtn.disabled = false;
+                    nextBtn.style.opacity = "1";
+                });
+        });
+
+        // 60FPS Particle Canvas Loop (Fine Minimalist Onyx Dust & Falling Hearts)
+        const canvas = document.getElementById('ambientCanvas');
+        const ctx = canvas.getContext('2d');
+        let particleArray = [];
+
+        function resizeStage() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeStage);
+        resizeStage();
+
+        class LuxuriousHeartParticle {
+            constructor() { this.reset(); }
+            reset() {
+                this.isHeart = Math.random() > 0.7; // 30% falling onyx luxury vector hearts
+                this.x = Math.random() * canvas.width;
+                this.y = this.isHeart ? -20 : Math.random() * canvas.height + canvas.height;
+                this.radius = Math.random() * 2 + 0.5;
+                this.size = Math.random() * 6 + 5;
+                this.speedY = this.isHeart ? (Math.random() * 0.6 + 0.3) : -(Math.random() * 0.3 + 0.1);
+                this.speedX = Math.sin(Math.random() * 4) * 0.15;
+                this.alpha = Math.random() * 0.4 + 0.2;
+                this.oscillationSpeed = Math.random() * 0.01 + 0.004;
+                this.rot = Math.random() * Math.PI;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.alpha += Math.sin(Date.now() * this.oscillationSpeed) * 0.002;
+                if (this.isHeart && this.y > canvas.height + 20) this.reset();
+                if (!this.isHeart && this.y < -20) this.reset();
+                if (this.alpha <= 0) this.reset();
+            }
+            render() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0.02, Math.min(this.alpha, 0.5));
+                ctx.fillStyle = '#000000';
+
+                if (this.isHeart) {
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.rot + Math.sin(Date.now() * 0.001) * 0.15);
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.bezierCurveTo(-this.size / 2, -this.size / 2, -this.size, 0, 0, this.size);
+                    ctx.bezierCurveTo(this.size, 0, this.size / 2, -this.size / 2, 0, 0);
+                    ctx.fill();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        for(let i=0; i<50; i++) { particleArray.push(new LuxuriousHeartParticle()); }
+        function loopAmbientPhysics() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particleArray.forEach(p => { p.update(); p.render(); });
+            requestAnimationFrame(loopAmbientPhysics);
+        }
+        loopAmbientPhysics();
+
+        // High-Precision Real-Time Countdown Calculations
+        const targetTimeline = new Date('November 25, 2030 20:00:00').getTime();
+        function refreshTimeCounters() {
+            const currentMoment = new Date().getTime();
+            const distanceMetric = targetTimeline - currentMoment;
+            if (distanceMetric > 0) {
+                document.getElementById('days').innerText = String(Math.floor(distanceMetric / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                document.getElementById('hours').innerText = String(Math.floor((distanceMetric % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(Math.floor((distanceMetric % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(Math.floor((distanceMetric % (1000 * 60)) / 1000)).padStart(2, '0');
+            }
+        }
+        setInterval(refreshTimeCounters, 1000);
+        refreshTimeCounters();
+    </script>
+</body>
+</html>
